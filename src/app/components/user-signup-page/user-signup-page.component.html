@@ -1,3 +1,65 @@
-<p>
-  user-signup-page works!
-</p>
+<main>
+  <div class="container g-py-30 mt-5">
+
+    <div class="row">
+      <div class="col-md-12 g-mb-30">
+        <div class="card canvas-outer-a">
+          <div class="card-body">
+            <div class="sub-header border-bottom-b1">
+              <h4 class="text-center">
+                SIGN UP
+              </h4>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <form class="border-bottom-b1 mt-15" [formGroup]="signUpForm" (submit)="submit()">
+
+                  <div class="form-group col-md col-xs-12">
+                    <label class="required">Username</label>
+                    <input class="form-control" formControlName="username"
+                           placeholder="Enter username" />
+                  </div>
+
+                  <div class="form-group col-md col-xs-12">
+                    <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                           type="Password" placeholder="Password" name="password" formControlName="password">
+                    <div class="text-danger" *ngIf="signUpForm.controls['password'].hasError('hasMinLength')">
+                      Password must have a minimum of 6 characters.
+                    </div>
+                    <div class="text-danger" *ngIf="signUpForm.controls['password'].hasError('hasNumber')">
+                      Password must have at least a number.
+                    </div>
+                    <div class="text-danger" *ngIf="signUpForm.controls['password'].hasError('hasSpecialCharacters')">
+                      Password must have at least a special character (!@#$%^&*()_+.)
+                    </div>
+                    <div class="text-danger" *ngIf="signUpForm.controls['password'].hasError('hasLowerCase')">
+                      Password must have at least a lower case character.
+                    </div>
+                    <div class="text-danger" *ngIf="signUpForm.controls['password'].hasError('hasUpperCase')">
+                      Password must have at least an uppercase character.
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md col-xs-12">
+                    <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                           type="Password" placeholder="Confirm Password" name="password" formControlName="confirmPassword">
+                    <div class="text-danger" *ngIf="signUpForm.controls['confirmPassword'].hasError('match') && signUpForm.controls['confirmPassword'].dirty">
+                      Passwords do not match.
+                    </div>
+                  </div>
+
+                  <div class="form-group text-center col-md col-xs-12 mb-5">
+                    <button class="btn btn-block btn-success" type="submit" [class.disabled]="signUpForm.invalid">
+                      <i class="fa fa-spinner fa-pulse" *ngIf=loading></i>&nbsp;sign up
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

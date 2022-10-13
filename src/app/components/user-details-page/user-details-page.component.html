@@ -1,3 +1,60 @@
-<p>
-  user-details-page works!
-</p>
+<main>
+<div class="container g-py-30 mt-5">
+  <div class="dashboard-header">
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-body p-10">
+          <div class="container">
+            <div class="border-bottom-b1 mb-3">
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <h3 class="text-center">User Details</h3>
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="col-md-4 col-sm-12 mt-2">
+                    <div class="row">
+                      <div class="col-12">Username</div>
+                      <div class="col-12"><b>{{data.username || 'N/A'}}</b></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12 mt-2">
+                    <div class="row">
+                      <div class="col-12">First Name</div>
+                      <div class="col-12"><b>{{data.firstName || 'N/A'}}</b></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12 mt-2">
+                    <div class="row">
+                      <div class="col-12">Last Name</div>
+                      <div class="col-12"><b>{{data.lastName || 'N/A'}}</b></div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-sm-12 mt-2">
+                    <div class="row">
+                      <div class="col-12">Email</div>
+                      <div class="col-12"><b>{{data.email || 'N/A'}}</b></div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-sm-12 mt-2">
+                    <div class="row">
+                      <div class="col-12">Date Created</div>
+                      <div class="col-12"><b>{{data.dateCreated || 'N/A'}}</b></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>

@@ -17,6 +17,8 @@ export class AuthenticationService {
   private static initialized: boolean;
   private static newUserToken: EventEmitter<string | null> = new EventEmitter();
   private static expiresIn: EventEmitter<string | null> = new EventEmitter();
+  private static ongoingFetch: Observable<any> | null;
+
 
   constructor(private httpClient: HttpClient,
               private userService: UserService,
@@ -30,7 +32,7 @@ export class AuthenticationService {
     const payload = {
       token,
     };
-    return this.httpClient.post(`http://localhost:8182/token/`, payload)
+    return this.httpClient.post(`${environment.baseUrl}/token/`, payload)
       .pipe(map((payload: any) => {
         AuthenticationService.initialized = false;
         AuthenticationService.newUserToken.next(payload.token);
@@ -67,7 +69,7 @@ export class AuthenticationService {
         wrapper.complete();
 
         AuthenticationService.user.next(user);
-        localStorage.removeItem('NCC_TOKEN');
+        localStorage.removeItem('TOKEN');
       }, (err: any) => {
         wrapper.error(err);
         wrapper.complete();
@@ -75,5 +77,13 @@ export class AuthenticationService {
       });
 
     return AuthenticationService.ongoingFetch;
+  }
+
+  public clearStaleSession() {
+    const redirect = AuthenticationService._user;
+    AuthenticationService.user.next(null);
+    if (redirect) {
+      window.location.href = '/login';
+    }
   }
 }
