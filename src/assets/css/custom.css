@@ -1,0 +1,76 @@
+body,
+html {
+  --primary-color: #0460a7;
+  --primary-color-2: #004479;
+  --btn-primary-2-bg: #e7f4ff;
+}
+.bdln {
+  border: 1px solid black;
+}
+
+.error-wrapper {
+  background: #fff7f7;
+  border-top: 5px solid #e3574e;
+
+  padding: 18px;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+
+  letter-spacing: 0.499974px;
+
+  color: #263238;
+}
+.error-wrapper ul,
+.error-wrapper ol {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+
+  letter-spacing: 0.499974px;
+
+  color: #263238;
+}
+.error-wrapper.show-color,
+.error-wrapper .show-color,
+.error-wrapper.show-color ul,
+.error-wrapper .show-color ul,
+.error-wrapper.show-color ol,
+.error-wrapper .show-color ol {
+  color: #a6332c;
+}
+
+
+.success-wrapper{
+  background: #FFF7F7;
+  border-top: 5px solid #50C878;
+
+  padding: 18px;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+
+  letter-spacing: 0.499974px;
+
+  color: #263238;
+}
+.success-wrapper ul,
+.success-wrapper ol{
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+
+  letter-spacing: 0.499974px;
+
+  color: #263238;
+}
+.success-wrapper.show-color,
+.success-wrapper .show-color,
+.success-wrapper.show-color ul,
+.success-wrapper .show-color ul,
+.success-wrapper.show-color ol,
+.success-wrapper .show-color ol{
+  color: #18A558;
+}
