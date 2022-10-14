@@ -16,41 +16,44 @@ export class AppComponent {
 
   constructor(public router: Router,
               private authService: AuthenticationService) {
-    this.loadToken();
+    // this.loadToken();
     this.authService.getUser().subscribe(user => {
       if (user) {
         this.user = user;
       }
       if (!this.user) {
         this.router.navigate(['login']);
+      } else {
+        this.router.navigate(['/details']);
       }
     });
 
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof RouteConfigLoadStart
-        || event instanceof NavigationStart) {
-        this.loading = true;
-      } else if (event instanceof NavigationEnd
-        || event instanceof NavigationCancel
-        || event instanceof NavigationError) {
-        this.loading = false;
-        if (router.url === '/') {
-          this.isLandingPage = true;
-          this.router.navigate(['login']);
-        } else {
-          this.isLandingPage = false;
-        }
-      }
-      if (event instanceof NavigationEnd) {
-        window.scroll(0, 0);
-      }
-      if (event instanceof NavigationError) {
-        console.log(event);
-      }
-    });
+    // this.router.events.subscribe((event: any) => {
+    //   if (event instanceof RouteConfigLoadStart
+    //     || event instanceof NavigationStart) {
+    //     this.loading = true;
+    //   } else if (event instanceof NavigationEnd
+    //     || event instanceof NavigationCancel
+    //     || event instanceof NavigationError) {
+    //     this.loading = false;
+    //     if (router.url === '/') {
+    //       this.isLandingPage = true;
+    //       this.router.navigate(['login']);
+    //     } else {
+    //       this.isLandingPage = false;
+    //     }
+    //   }
+    //   if (event instanceof NavigationEnd) {
+    //     window.scroll(0, 0);
+    //   }
+    //   if (event instanceof NavigationError) {
+    //     console.log(event);
+    //   }
+    // });
   }
 
   loadToken() {
+    console.log('load token');
     const savedToken = localStorage.getItem('TOKEN');
     let token = null;
     if (!savedToken) {
@@ -60,6 +63,7 @@ export class AppComponent {
       token = savedToken;
     }
     if (!token) {
+      console.log('no token');
       window.location.href = '/login';
     } else {
       localStorage.setItem('TOKEN', token);

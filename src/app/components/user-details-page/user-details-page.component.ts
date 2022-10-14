@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserPojo} from '../model/user-pojo.model';
 import {UserService} from '../service/user.service';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../auth/authentication.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -10,7 +12,9 @@ import {UserService} from '../service/user.service';
 export class UserDetailsPageComponent implements OnInit {
 
   data: UserPojo;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.userService.getUser().subscribe(it => {
@@ -18,4 +22,7 @@ export class UserDetailsPageComponent implements OnInit {
     });
   }
 
+  logout() {
+    this.authenticationService.logout();
+  }
 }

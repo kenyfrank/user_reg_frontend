@@ -5,6 +5,7 @@ import {AuthenticationService} from '../auth/authentication.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AuthToken} from '../model/auth-token.model';
 
 @Component({
   selector: 'app-login-page',
@@ -16,6 +17,8 @@ export class LoginPageComponent implements OnInit {
   user: UserPojo;
   loginForm: FormGroup;
   loading: boolean;
+  errMessage: any;
+  showErrorMessageTrigger: boolean = false;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -36,13 +39,27 @@ export class LoginPageComponent implements OnInit {
       if (this.user) {
         this.router.navigate(['/details']);
       } else {
-        this.authenticate();
+        // this.authenticate();
       }
     });
   }
 
+  showErrorMessage(error: any) {
+    this.errMessage = error;
+    this.showErrorMessageTrigger = true;
+    window.scroll(0, 0);
+    setTimeout(() => {
+      this.showErrorMessageTrigger = false;
+    }, 20000);
+  }
+
+
+  getErrorMessage() {
+    return this.errMessage;
+  }
+
   goToSignUp() {
-    this.router.navigate(['signup']);
+    this.router.navigate(['/signup']);
   }
 
   public submit(): void {
@@ -52,10 +69,20 @@ export class LoginPageComponent implements OnInit {
     }
     this.loading = true;
     const value = this.loginForm.value;
-    this.userService.createUser(value).subscribe(it => {
-
-    },(error: HttpErrorResponse) => {
-      console.log(error);
+    this.userService.login(value).subscribe((it: AuthToken) => {
+      this.loading = false;
+      this.showErrorMessageTrigger = false;
+      this.router.navigate(['/details']);
+      localStorage.setItem('TOKEN', it.token);
+      this.authenticationService.setUserId(it.userId);
+      this.authenticationService.setUserToken(it.token);
+    }, error => {
+      this.loading = false;
+      if (error && error.error && error.error.message) {
+        this.showErrorMessage(error.error.message);
+      } else {
+        this.showErrorMessage(error.message);
+      }
     });
   }
 
@@ -75,7 +102,7 @@ export class LoginPageComponent implements OnInit {
           this.authenticationService.clearStaleSession();
         }
       } else {
-        console.log('token error ==> ', error)
+        console.log('token error ==> ', error);
         this.authenticationService.clearStaleSession();
       }
     });

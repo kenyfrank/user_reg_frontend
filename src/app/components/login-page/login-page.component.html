@@ -12,8 +12,15 @@
             </div>
 
             <div class="row justify-content-center">
+              <div *ngIf="showErrorMessageTrigger" class="col-md-8 mb-5 mt-5 error-wrapper show-color danger-message mt-4">
+                <div class="d-flex mb-2"> <span class="iconify me-2" data-icon="carbon:warning-alt-filled" style="font-size: 24px;"></span> {{getErrorMessage()}}
+                </div>
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
               <div class="col-md-8">
-                <form class="border-bottom-b1 mt-15" [formGroup]="loginForm" (submit)="submit()">
+                <form class="border-bottom-b1 mt-15" [formGroup]="loginForm">
 
                   <div class="form-group col-md col-xs-12">
                     <label class="required">Username</label>
@@ -28,7 +35,7 @@
                   </div>
 
                   <div class="form-group col-md col-xs-12 text-center mb-5">
-                    <button class="btn btn-block btn-success" type="submit" [class.disabled]="loginForm.invalid">
+                    <button class="btn btn-block btn-success" type="button" (click)="submit()" [class.disabled]="loginForm.invalid">
                       <i class="fa fa-spinner fa-pulse" *ngIf=loading></i>&nbsp;Login
                     </button>
 
@@ -36,7 +43,6 @@
                       <a href="" class="g-font-weight-600" (click)="goToSignUp(); false">Click Here</a>
                     </p>
                   </div>
-
 
                 </form>
               </div>

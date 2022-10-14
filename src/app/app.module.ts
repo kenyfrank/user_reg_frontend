@@ -7,7 +7,7 @@ import { UserDetailsPageComponent } from './components/user-details-page/user-de
 import { UserSignupPageComponent } from './components/user-signup-page/user-signup-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {HttpInterceptorService} from './components/auth/http-interceptor.service';
+// import {HttpInterceptorService} from './components/auth/http-interceptor.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {RouterModule} from '@angular/router';
@@ -28,7 +28,7 @@ import {RouterModule} from '@angular/router';
       AppRoutingModule,
     ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+    // {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
   bootstrap: [AppComponent]
 })

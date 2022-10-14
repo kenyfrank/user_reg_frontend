@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://locahost:8182'
+  baseUrl: 'api',
+  sessionTimeout: 10
 };
 
 /*

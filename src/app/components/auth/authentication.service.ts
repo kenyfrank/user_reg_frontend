@@ -46,10 +46,19 @@ export class AuthenticationService {
     return AuthenticationService.newUserToken;
   }
 
+  public setUserId(userId: string) {
+    AuthenticationService.userId.next(userId);
+  }
+
+  public setUserToken(token: string) {
+    AuthenticationService.newUserToken.next(token);
+  }
+
   public logout() {
     AuthenticationService.newUserToken.next(null);
     AuthenticationService.user.next(null);
     localStorage.removeItem('AppComponent_token');
+    localStorage.removeItem('TOKEN');
     this.router.navigate(['login']);
   }
 
