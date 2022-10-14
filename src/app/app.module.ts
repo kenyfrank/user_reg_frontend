@@ -11,6 +11,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {RouterModule} from '@angular/router';
+import {HttpInterceptorService} from './components/auth/http-interceptor.service';
+import {DatetimePipe} from './components/util/datetime.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import {RouterModule} from '@angular/router';
     LandingPageComponent,
     UserDetailsPageComponent,
     UserSignupPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    DatetimePipe
   ],
     imports: [
       RouterModule.forRoot([]),
@@ -28,7 +31,7 @@ import {RouterModule} from '@angular/router';
       AppRoutingModule,
     ],
   providers: [
-    // {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
   bootstrap: [AppComponent]
 })

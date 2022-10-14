@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {UserPojo} from './components/model/user-pojo.model';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouteConfigLoadStart, Router} from '@angular/router';
 import {AuthenticationService} from './components/auth/authentication.service';
+import {PageManager} from './components/util/page-manager';
 
 @Component({
   selector: 'app-root',
@@ -14,18 +15,23 @@ export class AppComponent {
   isLandingPage = false;
   loading: boolean | undefined;
 
-  constructor(public router: Router,
+  constructor(public router: Router, private pageManager: PageManager,
               private authService: AuthenticationService) {
     // this.loadToken();
+    console.log('this.currentUser: ', this.pageManager.currentUser);
     this.authService.getUser().subscribe(user => {
       if (user) {
         this.user = user;
-      }
-      if (!this.user) {
-        this.router.navigate(['login']);
       } else {
-        this.router.navigate(['/details']);
+        this.user = this.pageManager.currentUser;
       }
+      console.log('this.user: ', this.user);
+      if (!this.user) {
+        this.router.navigate(['/login']);
+      }
+      // else {
+      //   this.router.navigate(['/details']);
+      // }
     });
 
     // this.router.events.subscribe((event: any) => {

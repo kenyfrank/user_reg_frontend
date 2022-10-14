@@ -1,65 +1,73 @@
 <main>
 <div class="container g-py-30 mt-5">
   <div class="dashboard-header">
-    <div class="container-fluid">
-      <div class="float-md-right">
-        <button class="btn btn-outline-primary" (click)="logout()">
-          Logout
-        </button>
-      </div>
+    <div class="row">
+      <div class="col-md-12 g-mb-30">
 
-      <div class="card">
+      <div *ngIf="data" class="card canvas-outer-a">
+        <div class="text-right">
+          <button class="btn btn-outline-primary" (click)="logout()">
+            Logout
+          </button>
+        </div>
         <div class="card-body p-10">
-          <div class="container">
             <div class="border-bottom-b1 mb-3">
-              <div class="row justify-content-center">
+              <div class="sub-header border-bottom-b1">
                 <div class="col-12">
                   <h3 class="text-center">User Details</h3>
                 </div>
+                <hr class="mt-2">
               </div>
 
               <div class="row justify-content-center">
                 <div class="col-md-8">
-                  <div class="col-md-4 col-sm-12 mt-2">
-                    <div class="row">
-                      <div class="col-12">Username</div>
-                      <div class="col-12"><b>{{data.username || 'N/A'}}</b></div>
+                  <div class="col-md-8 col-sm-12 mt-2">
+                    <div class="row ">
+                      <div class="col-md-4">Username:</div>
+                      <span style="color: green"><b>{{data.username || 'N/A'}}</b></span>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12 mt-2">
+                  <div class="col-md-8 col-sm-12 mt-2">
                     <div class="row">
-                      <div class="col-12">First Name</div>
-                      <div class="col-12"><b>{{data.firstName || 'N/A'}}</b></div>
+                      <div class="col-md-4">First Name:</div>
+                      <span style="color: green"><b>{{data.firstName || 'N/A'}}</b></span>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12 mt-2">
+                  <div class="col-md-8 col-sm-12 mt-2">
                     <div class="row">
-                      <div class="col-12">Last Name</div>
-                      <div class="col-12"><b>{{data.lastName || 'N/A'}}</b></div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-12 mt-2">
-                    <div class="row">
-                      <div class="col-12">Email</div>
-                      <div class="col-12"><b>{{data.email || 'N/A'}}</b></div>
+                      <div class="col-md-4">Last Name:</div>
+                      <span style="color: green"><b>{{data.lastName || 'N/A'}}</b></span>
                     </div>
                   </div>
 
-                  <div class="col-md-4 col-sm-12 mt-2">
+                  <div class="col-md-8 col-sm-12 mt-2">
                     <div class="row">
-                      <div class="col-12">Date Created</div>
-                      <div class="col-12"><b>{{data.dateCreated || 'N/A'}}</b></div>
+                      <div class="col-md-4">Email:</div>
+                      <span style="color: green"><b>{{data.email || 'N/A'}}</b></span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-8 col-sm-12 mt-2">
+                    <div class="row">
+                      <div class="col-md-4">Date Created</div>
+                      <span style="color: green"><b>{{(data.dateCreated | datetime) || 'N/A'}}</b></span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-8 col-sm-12 mt-2">
+                    <div class="row">
+                      <div class="col-md-4">Status:</div>
+                      <span style="color: green"><b>{{data.status || 'N/A'}}</b></span>
                     </div>
                   </div>
 
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 </main>

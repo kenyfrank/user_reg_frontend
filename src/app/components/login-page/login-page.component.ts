@@ -39,7 +39,11 @@ export class LoginPageComponent implements OnInit {
       if (this.user) {
         this.router.navigate(['/details']);
       } else {
-        // this.authenticate();
+        // this.authenticationService.fetchUser().subscribe(rst => {
+        //   if (rst) {
+        //     // this.router.navigate(['/details']);
+        //   }
+        // });
       }
     });
   }

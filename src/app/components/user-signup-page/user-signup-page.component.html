@@ -12,18 +12,44 @@
             </div>
 
             <div class="row justify-content-center">
+              <div *ngIf="showErrorMessageTrigger" class="col-md-8 mb-5 mt-5 error-wrapper show-color danger-message mt-4">
+                <div class="d-flex mb-2"> <span class="iconify me-2" data-icon="carbon:warning-alt-filled" style="font-size: 24px;"></span> {{getErrorMessage()}}
+                </div>
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
               <div class="col-md-8">
                 <form class="border-bottom-b1 mt-15" [formGroup]="signUpForm" (submit)="submit()">
 
                   <div class="form-group col-md col-xs-12">
                     <label class="required">Username</label>
-                    <input class="form-control" formControlName="username"
-                           placeholder="Enter username" />
+                    <input class="form-control" formControlName="username" placeholder="Enter username" />
+                    <small *ngIf="signUpForm.controls.username.dirty && signUpForm.controls.username.errors" style="color: red">username must not be less than 4 characters</small>
                   </div>
 
                   <div class="form-group col-md col-xs-12">
+                    <label class="required">First Name</label>
+                    <input class="form-control" formControlName="firstName" placeholder="Enter first name" />
+                    <small *ngIf="signUpForm.controls.firstName.dirty && signUpForm.controls.firstName.errors" style="color: red">first name must not be less than 2 characters</small>
+                  </div>
+
+                  <div class="form-group col-md col-xs-12">
+                    <label class="required">Last Name</label>
+                    <input class="form-control" formControlName="lastName" placeholder="Enter last name" />
+                    <small *ngIf="signUpForm.controls.lastName.dirty && signUpForm.controls.lastName.errors" style="color: red">last name must not be less than 2 characters</small>
+                  </div>
+
+                  <div class="form-group col-md col-xs-12">
+                    <label class="required">Email</label>
+                    <input type='email' class="form-control" formControlName="email" placeholder="Enter email" />
+                    <small *ngIf="signUpForm.controls.email.dirty && signUpForm.controls.email.errors" style="color: red">email must be valid</small>
+                  </div>
+
+                  <div class="form-group col-md col-xs-12">
+                    <label class="required">Password</label>
                     <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
-                           type="Password" placeholder="Password" name="password" formControlName="password">
+                           type="Password" placeholder="Enter password" name="password" formControlName="password">
                     <div class="text-danger" *ngIf="signUpForm.controls['password'].hasError('hasMinLength')">
                       Password must have a minimum of 6 characters.
                     </div>

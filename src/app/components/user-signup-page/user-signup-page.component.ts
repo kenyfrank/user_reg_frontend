@@ -14,6 +14,8 @@ import {PatternValidator} from '../validator/pattern-validator';
 export class UserSignupPageComponent implements OnInit {
   signUpForm: FormGroup;
   loading: boolean;
+  errMessage: any;
+  showErrorMessageTrigger: boolean = false;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -22,7 +24,10 @@ export class UserSignupPageComponent implements OnInit {
 
   ngOnInit() {
     this.signUpForm = this.fb.group({
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.compose([
         Validators.required,
         PatternValidator.patternValidator(/^.{6,}$/, {hasMinLength: true}),
@@ -45,9 +50,29 @@ export class UserSignupPageComponent implements OnInit {
     console.log('value: ', value);
     this.userService.createUser(value).subscribe(it => {
       this.router.navigate(['/details']);
+      this.loading = false;
     }, (error: HttpErrorResponse) => {
-      console.log(error);
+      this.loading = false;
+      if (error && error.error && error.error.message) {
+        this.showErrorMessage(error.error.message);
+      } else {
+        this.showErrorMessage(error.message);
+      }
     });
+  }
+
+  showErrorMessage(error: any) {
+    this.errMessage = error;
+    this.showErrorMessageTrigger = true;
+    window.scroll(0, 0);
+    setTimeout(() => {
+      this.showErrorMessageTrigger = false;
+    }, 20000);
+  }
+
+
+  getErrorMessage() {
+    return this.errMessage;
   }
 
   protected passwordsMatch() {

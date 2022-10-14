@@ -6,6 +6,7 @@ import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {UserPojo} from '../model/user-pojo.model';
 import {UserService} from '../service/user.service';
+import {PageManager} from '../util/page-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient,
               private userService: UserService,
-              private router: Router) { }
+              private router: Router, private pageManager: PageManager) { }
 
   public getUser() {
     return AuthenticationService.user;
@@ -76,7 +77,7 @@ export class AuthenticationService {
         const user = u;
         wrapper.next(user);
         wrapper.complete();
-
+        this.pageManager.setCurrentUser(user);
         AuthenticationService.user.next(user);
         localStorage.removeItem('TOKEN');
       }, (err: any) => {
